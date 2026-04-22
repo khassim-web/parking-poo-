@@ -7,32 +7,33 @@ L3 Informatique — Université Toulouse 2 Jean Jaurès
 
 ## Objectif
 
-Définir le modèle objet complet du système de parking DreamPark.  
-Cette partie contient l'architecture complète des classes avec leurs attributs, signatures de méthodes et tests unitaires associés.
+Concevoir et définir le modèle objet complet du système de parking DreamPark.  
+Cette partie contient l'architecture de toutes les classes avec leurs attributs, leurs signatures de méthodes et leurs tests unitaires.  
+Les méthodes sont volontairement laissées vides (`pass`) — elles sont implémentées dans les parties suivantes.
 
 ---
 
-## Classes implémentées
+## Classes du domaine
 
 | Classe | Rôle |
 |--------|------|
 | `Parking` | Gestionnaire central (places, accès, historique) |
-| `Place` | Place de stationnement (dimensions, état) |
+| `Place` | Place de stationnement (dimensions, état libre/occupée) |
 | `Voiture` | Véhicule (immatriculation, longueur, hauteur) |
-| `Client` | Propriétaire d'une voiture |
-| `Acces` | Point d'entrée/sortie (caméra, borne, téléporteurs, panneau) |
+| `Client` | Propriétaire d'une ou plusieurs voitures |
+| `Acces` | Point d'entrée/sortie équipé (caméra, borne, téléporteurs, panneau) |
 | `Placement` | Association Voiture ↔ Place avec horodatage |
 | `Borne_Ticket` | Émission de tickets et traitement des paiements |
-| `Teleporteur` | Transport instantané des véhicules |
-| `Panneau_Affichage` | Affichage du nombre de places disponibles |
-| `Camera` | Capture d'immatriculation et de dimensions |
+| `Teleporteur` | Transport instantané des véhicules vers une place ou un accès |
+| `Panneau_Affichage` | Affichage en temps réel du nombre de places disponibles |
+| `Camera` | Capture d'immatriculation et mesure des dimensions |
 | `Abonnement` | Abonnement client (mensuel, annuel, pack garanti) |
 | `Contrat` | Association Client ↔ Abonnement |
-| `Service` | Classe abstraite des services (Livraison, Maintenance, Entretien) |
-| `Livraison` | Service de livraison de véhicule à domicile |
-| `Maintenance` | Service de maintenance technique |
-| `Entretien` | Service d'entretien courant (lavage, nettoyage) |
-| `Voiturier` | Personnel effectuant les livraisons |
+| `Service` | Classe abstraite parente des services (Livraison, Maintenance, Entretien) |
+| `Livraison` | Service de livraison/récupération de véhicule à domicile |
+| `Maintenance` | Service de maintenance technique (révision, vidange, réparation) |
+| `Entretien` | Service d'entretien courant (lavage, nettoyage intérieur) |
+| `Voiturier` | Personnel effectuant les livraisons de véhicules |
 
 ---
 
@@ -41,13 +42,31 @@ Cette partie contient l'architecture complète des classes avec leurs attributs,
 ```
 partie0/
 ├── src/
-│   ├── modele/       # Classes du domaine
-│   └── tests/        # Tests unitaires par classe
-└── docs/             # Documentation HTML (pdoc)
+│   ├── modele/           # 17 classes du domaine
+│   │   ├── parking.py
+│   │   ├── place.py
+│   │   ├── voiture.py
+│   │   ├── client.py
+│   │   ├── acces.py
+│   │   ├── placement.py
+│   │   ├── borne_ticket.py
+│   │   ├── teleporteur.py
+│   │   ├── panneau_affichage.py
+│   │   ├── camera.py
+│   │   ├── abonnement.py
+│   │   ├── contrat.py
+│   │   ├── service.py
+│   │   ├── livraison.py
+│   │   ├── maintenance.py
+│   │   ├── entretien.py
+│   │   └── voiturier.py
+│   └── tests/            # Un fichier de test par classe
+└── docs/                 # Documentation HTML générée avec pdoc
 ```
 
 ---
 
 ## Documentation
 
-La documentation HTML générée avec `pdoc` est disponible dans `docs/`.
+La documentation HTML est disponible dans le dossier `docs/`.  
+Ouvrir `docs/modele/index.html` dans un navigateur pour la consulter.

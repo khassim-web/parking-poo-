@@ -7,24 +7,36 @@ L3 Informatique — Université Toulouse 2 Jean Jaurès
 
 ## Objectif
 
-Implémenter le use case complet permettant à un client de récupérer sa voiture du parking DreamPark.
+Implémenter le use case complet permettant à un client de récupérer sa voiture du parking DreamPark.  
+Cette partie s'appuie sur le modèle objet défini en Partie 0 et complète les méthodes nécessaires au scénario.
 
 ---
 
-## Scénario implémenté
+## Scénario "Reprendre la voiture"
 
-1. Le client arrive à l'accès et insère son ticket
-2. La borne calcule le montant dû (tarif : 2€/h, 30 min offertes)
-3. Le client paie par CB, espèces ou badge
-4. Le téléporteur ramène la voiture à l'accès
-5. La place est libérée et le panneau mis à jour
+```
+Client arrive à l'accès
+        ↓
+Insère son ticket dans la borne
+        ↓
+La borne calcule le montant dû
+  (tarif : 2 €/h, 30 premières minutes offertes)
+        ↓
+Client paie (CB / Espèces / Badge)
+        ↓
+Le téléporteur ramène la voiture à l'accès
+        ↓
+La place est libérée
+        ↓
+Le panneau d'affichage est mis à jour
+```
 
 ---
 
-## Classes complétées
+## Méthodes implémentées
 
-| Classe | Méthodes ajoutées |
-|--------|-------------------|
+| Classe | Méthodes |
+|--------|----------|
 | `Place` | `liberer()` |
 | `Voiture` | `retirer()` |
 | `Borne_Ticket` | `lire_ticket()`, `calculer_montant_du()`, `traiter_paiement()` |
@@ -47,14 +59,14 @@ Implémenter le use case complet permettant à un client de récupérer sa voitu
 ```bash
 cd partie2
 python3 -m venv .venv
-source .venv/bin/activate
+source .venv/bin/activate        # Windows : .venv\Scripts\activate
 pip install -r requirements.txt
 ```
 
 ## Lancer les tests
 
 ```bash
-# Tous les tests (22 tests)
+# Tous les tests
 pytest src/tests/ -v
 
 # Use case complet uniquement
@@ -64,7 +76,7 @@ pytest src/tests/test_use_case_reprendre_voiture.py -v
 pytest --cov=src/model src/tests/
 ```
 
-## Démonstration
+## Lancer la démonstration
 
 ```bash
 python src/demo_reprendre_voiture.py

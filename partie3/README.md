@@ -7,7 +7,8 @@ L3 Informatique — Université Toulouse 2 Jean Jaurès
 
 ## Objectif
 
-Implémenter un module de statistiques pour le parking DreamPark selon le patron de conception **MVC (Modèle-Vue-Contrôleur)**.
+Implémenter un module de statistiques pour le parking DreamPark en suivant le patron de conception **MVC (Modèle-Vue-Contrôleur)**.  
+Ce module permet de générer des rapports d'activité (console et HTML) à partir de l'historique des passages.
 
 ---
 
@@ -16,50 +17,60 @@ Implémenter un module de statistiques pour le parking DreamPark selon le patron
 ```
 src/
 ├── model/
-│   └── statistiques.py        # Modèle — historique des passages
+│   └── statistiques.py             # Modèle — historique et calculs
 ├── controller/
 │   └── statistiques_controller.py  # Contrôleur — orchestration
 └── view/
-    └── statistiques_view.py   # Vue — affichage texte + export HTML
+    └── statistiques_view.py        # Vue — affichage texte et export HTML
 ```
 
 ### Modèle — `Statistiques`
 
-Gère la persistance en mémoire des placements terminés.
+Gère la persistance en mémoire des placements terminés et calcule les indicateurs.
 
 | Méthode | Description |
 |---------|-------------|
 | `ajouter_passage(placement)` | Archive un placement finalisé |
-| `get_chiffre_affaires_total()` | Calcule le CA total |
-| `get_frequentation_par_service()` | Répartition par type de service |
-| `identifier_clients_reguliers(seuil)` | Détecte les clients fréquents |
+| `get_chiffre_affaires_total()` | Calcule le chiffre d'affaires total |
+| `get_frequentation_par_service()` | Répartition des passages par type de service |
+| `identifier_clients_reguliers(seuil)` | Détecte les clients dont le nombre de passages dépasse le seuil |
 
 ### Contrôleur — `StatistiquesController`
 
-Orchestre la récupération des données et pilote la génération des rapports.
+Orchestre la récupération des données du modèle et pilote la génération des rapports via la vue.
 
 | Méthode | Description |
 |---------|-------------|
-| `collecter_donnees()` | Agrège CA, fréquentation, clients réguliers |
-| `generer_rapport_texte()` | Affichage console |
-| `generer_rapport_html(fichier)` | Export HTML stylisé |
+| `collecter_donnees()` | Agrège CA, fréquentation et clients réguliers |
+| `generer_rapport_texte()` | Affiche le rapport dans la console |
+| `generer_rapport_html(fichier)` | Exporte le rapport dans un fichier HTML |
 
 ### Vue — `StatistiquesView`
 
-Gère la présentation des données.
+Gère la présentation des données sous deux formats :
 
-- Rapport **console** : résumé rapide pour l'administrateur
-- Rapport **HTML** : document structuré avec tableau des passages
+- **Console** : résumé rapide lisible par l'administrateur
+- **HTML** : document stylisé avec tableau détaillé des passages
 
 ---
 
-## Installation et exécution
+## Lancer les tests
 
 ```bash
 cd partie3
-PYTHONPATH=src pytest tests/ -v      # 4 tests
-PYTHONPATH=src python src/demo_statistiques.py  # Génère le rapport HTML
+PYTHONPATH=src pytest tests/ -v
 ```
+
+## Lancer la démonstration
+
+```bash
+cd partie3
+PYTHONPATH=src python src/demo_statistiques.py
+```
+
+Le fichier `rapport_final_dreampark.html` est généré dans le dossier `partie3/`.
+
+---
 
 ## Résultats
 
@@ -67,11 +78,7 @@ PYTHONPATH=src python src/demo_statistiques.py  # Génère le rapport HTML
 4 passed in 0.01s
 ```
 
-Le rapport HTML est généré dans `rapport_final_dreampark.html`.
-
----
-
-## Exemple de rapport
+## Exemple de rapport console
 
 ```
 ========================================
